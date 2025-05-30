@@ -4,7 +4,9 @@
 import type { GenerateSkillOutput } from "@/ai/flows/generate-skill";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { CheckCircle2, ExternalLink, RefreshCw } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { CheckCircle2, ExternalLink, RefreshCw, Sparkles, ShieldCheck, TrendingUp } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ResultSectionProps {
   skillData: GenerateSkillOutput;
@@ -12,35 +14,65 @@ interface ResultSectionProps {
 }
 
 export function ResultSection({ skillData, onRestart }: ResultSectionProps) {
+  const { skillName, skillDescription, habits } = skillData;
+
   return (
-    <section aria-labelledby="result-title" className="space-y-8 animate-fadeInUp">
-      <Card className="text-card-foreground border-primary/50 border shadow-xl overflow-hidden">
-        <CardHeader className="bg-primary/10 p-6">
-          <CardTitle id="result-title" className="text-3xl font-bold uppercase text-primary text-center drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)]">
-            {skillData.skillName}
-          </CardTitle>
-          <CardDescription className="text-center text-muted-foreground mt-1">
-            ¡Tu nueva habilidad ha sido forjada!
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="p-6 space-y-6">
-          <div>
-            <h3 className="text-xl font-semibold text-foreground mb-3 uppercase">Primeros Pasos:</h3>
-            <ul className="space-y-3">
-              {skillData.habits.map((habit, index) => (
-                <li key={index} className="flex items-start p-3 bg-input rounded-md shadow">
-                  <CheckCircle2 className="h-6 w-6 text-accent mr-3 mt-1 shrink-0" />
-                  <span className="text-foreground">{habit}</span>
-                </li>
-              ))}
-            </ul>
+    <section aria-labelledby="result-title-outer" className="space-y-8 animate-fadeInUp">
+      {/* Skill Card - Red Background */}
+      <Card className="bg-primary text-primary-foreground border-red-700/80 shadow-xl overflow-hidden">
+        <CardHeader className="p-6 text-center">
+          <div className="flex justify-center mb-3">
+            <Sparkles className="h-10 w-10 text-amber-300 animate-pulse" />
           </div>
-          <p className="text-center text-lg font-semibold text-accent">
-            ¡Buen Comienzo, Héroe!
-          </p>
+          <CardTitle id="result-title-outer" className="text-3xl md:text-4xl font-bold uppercase drop-shadow-[0_2px_2px_rgba(0,0,0,0.4)]">
+            {skillName}
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-6 pt-2 text-center">
+          <p className="text-lg md:text-xl text-primary-foreground/90">{skillDescription}</p>
         </CardContent>
       </Card>
 
+      {/* Habits Card */}
+      <Card className="text-card-foreground border-border shadow-lg">
+        <CardHeader className="bg-card/50 p-6 rounded-t-lg">
+          <CardTitle className="text-2xl font-semibold text-primary text-center uppercase">
+            Entrenamiento Diario
+          </CardTitle>
+          <CardDescription className="text-center text-muted-foreground mt-1">
+            Completa estas misiones para dominar tu nueva habilidad:
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="p-4 md:p-6 space-y-4">
+          {habits.map((habit, index) => (
+            <Card key={index} className="bg-input shadow-md border-border hover:border-accent transition-all">
+              <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-2 sm:space-y-0 sm:space-x-2 pb-2 pt-4 px-4">
+                <div className="flex items-center space-x-2">
+                  {habit.difficulty === 'Fácil' ? <ShieldCheck className="h-5 w-5 text-green-500 shrink-0" /> : <TrendingUp className="h-5 w-5 text-amber-500 shrink-0" />}
+                  <CardTitle className="text-lg font-medium text-accent leading-tight">
+                    {habit.habitName}
+                  </CardTitle>
+                </div>
+                <Badge
+                  className={cn(
+                    "px-3 py-1 text-xs font-bold uppercase self-start sm:self-center mt-2 sm:mt-0",
+                    habit.difficulty === 'Fácil'
+                      ? 'bg-green-600 hover:bg-green-700 text-white border-transparent'
+                      : 'bg-amber-500 hover:bg-amber-600 text-black border-transparent'
+                  )}
+                >
+                  {habit.difficulty}
+                </Badge>
+              </CardHeader>
+              <CardContent className="pb-4 px-4 pt-1">
+                <p className="text-muted-foreground text-sm">{habit.explanation}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </CardContent>
+      </Card>
+
+      {/* Call to Action Card (LifeQuest RPG) */}
       <Card className="text-card-foreground border-border shadow-lg">
         <CardContent className="p-6 space-y-4 text-center">
           <h2 className="text-2xl font-bold uppercase text-primary">¡Esto es solo el Comienzo de tu Aventura!</h2>
@@ -59,7 +91,7 @@ export function ResultSection({ skillData, onRestart }: ResultSectionProps) {
             size="lg"
           >
             <a href="https://firebase.google.com/products/app-hosting" target="_blank" rel="noopener noreferrer"> {/* Placeholder Link */}
-              <span className="flex items-center">
+              <span className="flex items-center justify-center">
                 ¡Comenzar mi LifeQuest Ahora! <ExternalLink className="ml-2 h-4 w-4" />
               </span>
             </a>
