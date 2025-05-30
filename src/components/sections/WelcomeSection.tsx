@@ -70,4 +70,3 @@ export function WelcomeSection({ onContinue }: WelcomeSectionProps) {
     </section>
   );
 }
-```
