@@ -1,6 +1,6 @@
 
 import type { Metadata } from 'next';
-import { Geist } from 'next/font/google'; // Using Geist Sans only as per P5R style (modern sans-serif)
+import { Geist } from 'next/font/google';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 
@@ -10,7 +10,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: 'Persona Skill Forger',
+  title: 'Skill Forger',
   description: 'Forja tu Destino: ¡Desbloquea tu próxima Skill con IA!',
 };
 
@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${geistSans.variable} font-sans antialiased`}>
+      <body className={`${geistSans.variable} font-sans antialiased bg-background text-foreground`}>
         {children}
         <Toaster />
       </body>
