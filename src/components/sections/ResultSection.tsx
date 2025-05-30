@@ -14,9 +14,9 @@ interface ResultSectionProps {
 export function ResultSection({ skillData, onRestart }: ResultSectionProps) {
   return (
     <section aria-labelledby="result-title" className="space-y-8 animate-fadeInUp">
-      <Card className="bg-card text-card-foreground border-primary border-2 shadow-xl rounded-none overflow-hidden">
+      <Card className="text-card-foreground border-primary/50 border shadow-xl overflow-hidden">
         <CardHeader className="bg-primary/10 p-6">
-          <CardTitle id="result-title" className="text-3xl font-bold uppercase text-primary text-center drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+          <CardTitle id="result-title" className="text-3xl font-bold uppercase text-primary text-center drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)]">
             {skillData.skillName}
           </CardTitle>
           <CardDescription className="text-center text-muted-foreground mt-1">
@@ -28,7 +28,7 @@ export function ResultSection({ skillData, onRestart }: ResultSectionProps) {
             <h3 className="text-xl font-semibold text-foreground mb-3 uppercase">Primeros Pasos:</h3>
             <ul className="space-y-3">
               {skillData.habits.map((habit, index) => (
-                <li key={index} className="flex items-start p-3 bg-input rounded-none shadow">
+                <li key={index} className="flex items-start p-3 bg-input rounded-md shadow">
                   <CheckCircle2 className="h-6 w-6 text-accent mr-3 mt-1 shrink-0" />
                   <span className="text-foreground">{habit}</span>
                 </li>
@@ -41,13 +41,13 @@ export function ResultSection({ skillData, onRestart }: ResultSectionProps) {
         </CardContent>
       </Card>
 
-      <Card className="bg-card text-card-foreground border-border shadow-lg rounded-none">
+      <Card className="text-card-foreground border-border shadow-lg">
         <CardContent className="p-6 space-y-4 text-center">
           <h2 className="text-2xl font-bold uppercase text-primary">¡Esto es solo el Comienzo de tu Aventura!</h2>
           <p className="text-muted-foreground">
             Regístrate GRATIS en <strong className="text-accent">LifeQuest RPG</strong> para:
           </p>
-          <ul className="space-y-1 text-left text-foreground list-inside list-disc marker:text-primary">
+          <ul className="space-y-1 text-left text-foreground list-inside list-disc marker:text-primary pl-4 sm:pl-0">
             <li>Desbloquear el Quiz Completo y recibir 5 Skills personalizadas.</li>
             <li>Rastrear tu progreso en estas y otras habilidades.</li>
             <li>Ganar XP, subir de nivel y personalizar tu Héroe.</li>
@@ -55,10 +55,11 @@ export function ResultSection({ skillData, onRestart }: ResultSectionProps) {
           </ul>
           <Button
             asChild
-            className="p5r-button w-full md:w-auto mt-4"
+            className="w-full md:w-auto mt-4 text-base py-5 px-6 font-semibold"
+            size="lg"
           >
             <a href="https://firebase.google.com/products/app-hosting" target="_blank" rel="noopener noreferrer"> {/* Placeholder Link */}
-              <span className="p5r-button-inner flex items-center">
+              <span className="flex items-center">
                 ¡Comenzar mi LifeQuest Ahora! <ExternalLink className="ml-2 h-4 w-4" />
               </span>
             </a>
@@ -75,9 +76,10 @@ export function ResultSection({ skillData, onRestart }: ResultSectionProps) {
         <Button
             onClick={onRestart}
             variant="outline"
-            className="p5r-button-secondary w-full md:w-auto"
+            className="w-full md:w-auto text-base py-5 px-6"
+            size="lg"
           >
-           <span className="p5r-button-inner flex items-center">
+           <span className="flex items-center">
              <RefreshCw className="mr-2 h-4 w-4" /> Forjar Otra Skill
             </span>
         </Button>

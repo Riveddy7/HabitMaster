@@ -7,7 +7,7 @@ import { LoadingSection } from '@/components/sections/LoadingSection';
 import { ResultSection } from '@/components/sections/ResultSection';
 import { generateSkill, type GenerateSkillOutput } from '@/ai/flows/generate-skill';
 import { useToast } from "@/hooks/use-toast";
-import { Card, CardContent } from '@/components/ui/card'; // For consistent container styling
+// Removed Card and CardContent import as they are now encapsulated within sections
 
 type AppSection = 'input' | 'loading' | 'result';
 
@@ -61,8 +61,8 @@ export default function PersonaSkillForgerPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground p-4 sm:p-6 overflow-x-hidden">
-      <div className="w-full max-w-xl mx-auto">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground p-4 sm:p-6 md:p-8 overflow-x-hidden">
+      <main className="w-full max-w-xl mx-auto space-y-8">
         {currentSection === 'input' && (
           <InputSection
             improvementArea={improvementArea}
@@ -78,10 +78,10 @@ export default function PersonaSkillForgerPage() {
             onRestart={handleRestart}
           />
         )}
-      </div>
-      <footer className="mt-12 text-center text-xs text-muted-foreground/50">
+      </main>
+      <footer className="mt-12 text-center text-xs text-muted-foreground/80">
         <p>&copy; {new Date().getFullYear()} Persona Skill Forger. Todos los derechos reservados.</p>
-        <p>Inspirado por el universo Persona.</p>
+        <p>Inspirado por el universo Persona y LifeQuest RPG.</p>
       </footer>
     </div>
   );
