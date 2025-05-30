@@ -90,7 +90,7 @@ export function ResultSection({ skillData, onRestart }: ResultSectionProps) {
             className="w-full md:w-auto mt-4 text-base py-5 px-6 font-semibold"
             size="lg"
           >
-            <a href="https://firebase.google.com/products/app-hosting" target="_blank" rel="noopener noreferrer"> {/* Placeholder Link */}
+            <a href="https://irlrpg-two.vercel.app" target="_blank" rel="noopener noreferrer"> {/* Placeholder Link */}
               <span className="flex items-center justify-center">
                 ¡Comenzar mi LifeQuest Ahora! <ExternalLink className="ml-2 h-4 w-4" />
               </span>

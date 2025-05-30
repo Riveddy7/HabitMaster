@@ -8,7 +8,7 @@ import { ResultSection } from '@/components/sections/ResultSection';
 import { WelcomeSection } from '@/components/sections/WelcomeSection';
 import { generateSkill, type GenerateSkillOutput } from '@/ai/flows/generate-skill';
 import { useToast } from "@/hooks/use-toast";
-import { useIsMobile } from "@/hooks/use-mobile"; 
+import { useIsMobile } from "@/hooks/use-mobile";
 import { Skeleton } from "@/components/ui/skeleton";
 
 type AppSection = 'initialLoading' | 'welcome' | 'input' | 'loading' | 'result';
@@ -31,6 +31,13 @@ export default function SkillForgerPage() {
     }
   }, [isMobile]);
 
+  // Scroll to top when currentSection changes
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo(0, 0);
+    }
+  }, [currentSection]);
+
   const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setImprovementArea(e.target.value);
   };
@@ -52,7 +59,7 @@ export default function SkillForgerPage() {
 
     setIsLoading(true);
     setCurrentSection('loading');
-    setGeneratedSkill(null); 
+    setGeneratedSkill(null);
 
     try {
       const result = await generateSkill({ improvementArea });
@@ -65,7 +72,7 @@ export default function SkillForgerPage() {
         description: "Hubo un problema al generar tu skill. Por favor, inténtalo de nuevo.",
         variant: "destructive",
       });
-      setCurrentSection(isMobile ? 'welcome' : 'input'); 
+      setCurrentSection(isMobile ? 'welcome' : 'input');
     } finally {
       setIsLoading(false);
     }
@@ -87,7 +94,7 @@ export default function SkillForgerPage() {
 
   return (
     <div className={`min-h-screen flex flex-col items-center justify-center p-0 sm:p-4 md:p-6 ${isMobile && currentSection === 'welcome' ? 'mobile-page-transparent-bg' : 'bg-background'}`}>
-      <main className="w-full max-w-2xl mx-auto space-y-6 sm:space-y-10">
+      <main className="w-full max-w-2xl mx-auto space-y-6 sm:space-y-10 py-8 sm:py-12 px-4">
         {currentSection === 'welcome' && isMobile && (
           <WelcomeSection onContinue={handleWelcomeContinue} />
         )}
