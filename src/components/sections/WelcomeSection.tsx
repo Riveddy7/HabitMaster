@@ -32,7 +32,7 @@ export function WelcomeSection({ onContinue }: WelcomeSectionProps) {
                 data-ai-hint="guide avatar circular"
                 >
                  <Image 
-                    src="https://placehold.co/128x128.png" // Reemplazar con el avatar real
+                    src="https://firebasestorage.googleapis.com/v0/b/questifyv2-4d669.firebasestorage.app/o/avatarMujer.webp?alt=media&token=65e6abed-fb11-4568-b637-6bfece2ff4de" // Reemplazar con el avatar real
                     alt="Avatar del Guía"
                     width={128}
                     height={128}
