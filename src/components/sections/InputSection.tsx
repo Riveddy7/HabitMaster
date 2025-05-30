@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-// import Image from 'next/image'; // No se usa de momento
+import Image from 'next/image';
 
 interface InputSectionProps {
   improvementArea: string;
@@ -22,11 +22,18 @@ export function InputSection({ improvementArea, onInputChange, onSubmit, isLoadi
       <Card className="bg-card text-card-foreground border-primary/50 shadow-xl rounded-md overflow-hidden">
         <CardContent className="p-4 sm:p-6 flex flex-col items-center text-center">
           {/* Placeholder para el Avatar del Coach P5R */}
-          <div 
-            className="w-24 h-24 sm:w-28 sm:h-28 bg-muted/30 border-2 border-primary rounded-md mb-4 flex items-center justify-center"
+          <div
+            className="w-24 h-24 sm:w-28 sm:h-28 bg-muted/30 border-2 border-primary rounded-md mb-4 flex items-center justify-center overflow-hidden"
             data-ai-hint="coach avatar"
           >
-            <span className="text-xs text-muted-foreground">AVATAR</span>
+            <Image
+              src="https://firebasestorage.googleapis.com/v0/b/questifyv2-4d669.firebasestorage.app/o/avatarMujer.webp?alt=media&token=65e6abed-fb11-4568-b637-6bfece2ff4de"
+              alt="Avatar del Coach"
+              width={112} // Corresponds to w-28
+              height={112} // Corresponds to h-28
+              className="object-cover w-full h-full"
+              data-ai-hint="female guide avatar"
+            />
           </div>
           <p className="text-xl sm:text-2xl font-bold text-primary">¡Alto ahí, Héroe!</p>
           <p className="text-base sm:text-lg text-foreground">Tu potencial te trajo aquí. Dime...</p>
